@@ -6,6 +6,9 @@ const path = require("path");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Middleware para procesar datos de formularios
+app.use(express.urlencoded({ extended: true }));
+
 // Servir archivos estáticos desde "public"
 app.use(express.static(path.join(__dirname, "public")));
 
