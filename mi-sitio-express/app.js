@@ -6,7 +6,7 @@ const path = require("path");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Middleware para procesar datos de formularios
+// Para procesar datos de formularios
 app.use(express.urlencoded({ extended: true }));
 
 // Servir archivos estáticos desde "public"
@@ -15,6 +15,11 @@ app.use(express.static(path.join(__dirname, "public")));
 // Importar rutas
 const mainRoutes = require("./routes/mainRoutes");
 app.use("/", mainRoutes);
+
+// Para manejar errores 404
+app.use((req, res) => {
+    res.status(404).render("404", { title: "Error 404" });
+});
 
 // Iniciar el servidor
 const PORT = 3000;
